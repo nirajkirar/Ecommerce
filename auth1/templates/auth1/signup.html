@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Reset default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply a background color to the entire body */
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+/* Style for the buttons */
+input[type="button"], input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+/* Apply some spacing around the buttons */
+a {
+    text-decoration: none;
+    margin: 10px;
+}
+
+/* Style for the form */
+form {
+    background-color: #f9f9f9;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+/* Style for form labels and input fields */
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style for messages */
+.messages {
+    margin-top: 10px;
+    color: #ff0000;
+    text-align: center;
+}
+
+/* Center the form on the page */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <a href="{% url 'login' %}"><input type="button" value="Log In"></a>
+    <a href="{% url 'logout' %}"><input type="button" value="Log Out"></a>
+    
+    <form action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+        {% for i in fm %}
+        <br><br>
+        {{i.label}}
+        {{i.errors|striptags}}
+        <br>
+        {{i}}
+        {% endfor%}
+        <br><br>
+        <input type="submit" value="Sign Up">
+    </form>
+    {% for i in messages %}
+    {{i}}
+    {% endfor%}
+</body>
+
+</html>

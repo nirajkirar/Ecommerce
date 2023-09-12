@@ -1,0 +1,31 @@
+{% extends 'product/index.html' %}
+
+{% block one %}
+
+<div class="row">
+    {% for i in data %}
+
+    <div class="col-6">
+        <img src="{{i.image.url}}" alt="not found" width="100px" height="100px">
+        <div>
+            <h5>Product Name : {{i.name}}</h5>
+            <h5>Product Price : {{i.price}}</h5>
+            <h5>Product Quantity : {{i.quantity}}</h5>
+            <h5>Product Description : {{i.desc}}</h5>
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <input type="number" name="req_quan">
+                <input type="hidden" name="instock" value="{{i.quantity}}">
+
+                <input type="hidden" name="id_product" value="{{i.id}}">
+                <input type="submit" value="Add to cart" required>
+               {% if id == i.id %} {{msg1}} {% endif %}
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock one %}
